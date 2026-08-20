@@ -51,18 +51,24 @@ export default function DashboardLayout({ children }) {
             </NavLink>
           </nav>
 
-          {/* Desktop Footer: User info, Theme toggle & Sign out */}
-          <div className="mt-6 flex items-center justify-between border-t border-slate-200/60 pt-4 dark:border-slate-800/60">
-            <div className="min-w-0 pr-1">
-              <p className="truncate text-sm font-medium text-slate-900 dark:text-slate-100">
-                {profile?.username ?? 'Loading...'}
-              </p>
-              <p className="text-xs uppercase tracking-wider text-slate-500">
-                Student
-              </p>
-            </div>
-            <div className="flex items-center gap-1.5">
+          {/* Desktop Footer: Theme toggle placed above the profile */}
+          <div className="mt-auto flex flex-col gap-4 border-t border-slate-200/60 pt-4 dark:border-slate-800/60">
+            <div className="flex items-center justify-between px-1">
+              <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
+                Theme
+              </span>
               <ThemeToggle />
+            </div>
+
+            <div className="flex items-center justify-between pt-1">
+              <div className="min-w-0 pr-2">
+                <p className="truncate text-sm font-medium text-slate-900 dark:text-slate-100">
+                  {profile?.username ?? 'Loading...'}
+                </p>
+                <p className="text-xs uppercase tracking-wider text-slate-500">
+                  Student
+                </p>
+              </div>
               <button
                 onClick={handleSignOut}
                 aria-label="Sign out"
