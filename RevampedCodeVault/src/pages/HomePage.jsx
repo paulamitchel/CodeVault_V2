@@ -36,7 +36,7 @@ const LANGUAGES = [
 const FAQS = [
   {
     q: 'Do I need to install anything?',
-    a: 'No. CodeVault runs entirely in the browser \u2014 editor, compiler, and file storage all live online, so there\u2019s nothing to set up on your machine.',
+    a: 'No. CodeVault runs entirely in the browser — editor, compiler, and file storage all live online, so there’s nothing to set up on your machine.',
   },
   {
     q: 'Which languages can I run?',
@@ -52,14 +52,14 @@ const FAQS = [
   },
   {
     q: 'Is CodeVault free?',
-    a: 'Yes \u2014 CodeVault is a free student project built to remove the friction of Git for beginner programmers.',
+    a: 'Yes — CodeVault is a free student project built to remove the friction of Git for beginner programmers.',
   },
 ];
 
 const SNIPPETS = [
   {
     file: 'main.py',
-    output: 'Hello, world! \u00b7 42ms',
+    output: 'Hello, world! · 42ms',
     lines: (
       <>
         <p><span className="text-purple-400">def</span> <span className="text-sky-400">greet</span>(<span className="text-orange-400">name</span>):</p>
@@ -70,7 +70,7 @@ const SNIPPETS = [
   },
   {
     file: 'main.js',
-    output: 'Hello, world! \u00b7 18ms',
+    output: 'Hello, world! · 18ms',
     lines: (
       <>
         <p><span className="text-purple-400">function</span> <span className="text-sky-400">greet</span>(<span className="text-orange-400">name</span>) {'{'}</p>
@@ -82,7 +82,7 @@ const SNIPPETS = [
   },
   {
     file: 'Main.java',
-    output: 'Hello, world! \u00b7 96ms',
+    output: 'Hello, world! · 96ms',
     lines: (
       <>
         <p><span className="text-purple-400">public class</span> <span className="text-sky-400">Main</span> {'{'}</p>
@@ -183,7 +183,7 @@ function EditorMockup() {
   const snippet = SNIPPETS[index];
 
   return (
-    <div className="glass-card mx-auto w-full max-w-md p-1">
+    <div className="glass-card mx-auto w-full max-w-md p-1 shadow-lg">
       <div className="monaco-wrapper bg-white/40 dark:bg-black/20">
         <div className="flex items-center gap-1.5 border-b border-slate-200/60 px-4 py-3 dark:border-slate-800/60">
           <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
@@ -231,20 +231,9 @@ function NavAnchor({ href, label, onClick }) {
   );
 }
 
-function HeroSecondaryLink() {
-  return (
-    <a
-      href="#features"
-      className="pill-btn border border-slate-200/80 bg-white/60 px-6 py-3 text-sm font-medium text-slate-700 backdrop-blur-xl hover:bg-white dark:border-slate-800 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
-    >
-      See how it works
-    </a>
-  );
-}
-
 function StepBadge({ icon }) {
   return (
-    <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-2xl bg-slate-900 text-white dark:bg-white dark:text-slate-900">
+    <div className="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-xl bg-slate-900 text-white shadow-sm dark:bg-white dark:text-slate-900">
       {icon}
     </div>
   );
@@ -252,7 +241,7 @@ function StepBadge({ icon }) {
 
 function WriteRunVisual() {
   return (
-    <div className="flex h-48 w-full flex-col justify-center gap-2 px-7">
+    <div className="flex h-44 w-full flex-col justify-center gap-2 px-6 sm:h-48 sm:px-7">
       <div className="flex items-center gap-1.5">
         <span className="h-2 w-2 rounded-full bg-red-400/70" />
         <span className="h-2 w-2 rounded-full bg-amber-400/70" />
@@ -273,14 +262,14 @@ function WriteRunVisual() {
 
 function FoldersVisual() {
   return (
-    <div className="grid h-48 w-full grid-cols-3 items-center gap-3 px-7">
+    <div className="grid h-44 w-full grid-cols-3 items-center gap-2.5 px-4 sm:h-48 sm:gap-3 sm:px-7">
       {FOLDER_CHIPS.map((name) => (
         <div
           key={name}
           className="flex flex-col items-center justify-center gap-1.5 rounded-xl bg-white/70 py-3 text-center shadow-sm dark:bg-white/5"
         >
           <FolderTree size={16} className="text-slate-400" />
-          <span className="text-[10px] font-medium text-slate-500 dark:text-slate-400">
+          <span className="text-[11px] font-medium text-slate-600 dark:text-slate-400">
             {name}
           </span>
         </div>
@@ -291,7 +280,7 @@ function FoldersVisual() {
 
 function ExploreVisual() {
   return (
-    <div className="flex h-48 w-full flex-col items-center justify-center gap-3">
+    <div className="flex h-44 w-full flex-col items-center justify-center gap-3 sm:h-48">
       <div className="flex items-center gap-2">
         <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-xs font-semibold text-white dark:bg-white dark:text-slate-900">
           JS
@@ -332,14 +321,16 @@ export default function HomePage() {
 
   return (
     <div className="app-canvas min-h-screen">
+      {/* Background Aura Gradients */}
       <div className="pointer-events-none absolute -left-24 top-0 h-96 w-96 rounded-full bg-pink-200/40 aura-blur animate-floatAura dark:bg-indigo-500/20" />
       <div className="pointer-events-none absolute right-0 top-60 h-[28rem] w-[28rem] rounded-full bg-sky-200/40 aura-blur animate-floatAura dark:bg-violet-500/20" />
       <div className="pointer-events-none absolute bottom-0 left-1/3 h-80 w-80 rounded-full bg-mint-200/30 aura-blur animate-floatAura dark:bg-cyan-500/15" />
 
+      {/* Navigation */}
       <nav className={`sticky top-0 z-30 transition-all ${scrolled ? 'backdrop-blur-xl' : ''}`}>
         <div
-          className={`mx-auto flex max-w-6xl items-center justify-between py-4 pl-3 pr-6 transition-all ${
-            scrolled ? 'glass-panel mt-3 rounded-pill' : ''
+          className={`mx-auto flex max-w-6xl items-center justify-between px-4 py-3.5 transition-all md:py-4 md:pl-3 md:pr-6 ${
+            scrolled ? 'glass-panel mx-3 mt-2 rounded-2xl md:mx-auto md:mt-3 md:rounded-pill' : ''
           }`}
         >
           <div className="flex items-center gap-2">
@@ -359,7 +350,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <ThemeToggle />
             <Link
               to="/auth"
@@ -371,7 +362,7 @@ export default function HomePage() {
               onClick={() => setMobileOpen((v) => !v)}
               aria-label="Toggle menu"
               aria-expanded={mobileOpen}
-              className="flex h-9 w-9 items-center justify-center rounded-full text-slate-600 hover:bg-white/60 dark:text-slate-300 dark:hover:bg-white/10 md:hidden"
+              className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200/70 bg-white/70 text-slate-700 shadow-sm transition-colors hover:bg-white dark:border-slate-700 dark:bg-white/10 dark:text-slate-200 md:hidden"
             >
               {mobileOpen ? <X size={18} /> : <Menu size={18} />}
             </button>
@@ -379,7 +370,7 @@ export default function HomePage() {
         </div>
 
         {mobileOpen && (
-          <div className="glass-panel mx-4 mt-2 flex flex-col gap-1 p-4 md:hidden">
+          <div className="glass-panel mx-4 mt-2 flex flex-col gap-1 p-4 shadow-xl md:hidden">
             {navLinks.map((link) => (
               <NavAnchor
                 key={link.href}
@@ -399,14 +390,15 @@ export default function HomePage() {
         )}
       </nav>
 
-      <header className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-6 pb-10 pt-8 text-center sm:pt-12">
+      {/* Hero Section */}
+      <header className="relative z-10 mx-auto flex max-w-4xl flex-col items-center px-5 pb-10 pt-8 text-center sm:px-6 sm:pt-12">
         <span className="mb-3 rounded-pill border border-slate-200/80 bg-white/60 px-4 py-1.5 text-xs font-medium uppercase tracking-widest text-slate-500 backdrop-blur-xl dark:border-slate-800 dark:bg-white/5 dark:text-slate-400">
           Built for beginner programmers
         </span>
-        <h1 className="text-4xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 sm:text-6xl">
+        <h1 className="text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 sm:text-6xl">
           Where student ideas compile.
         </h1>
-        <p className="mt-4 max-w-xl text-lg text-slate-500 dark:text-slate-400">
+        <p className="mt-4 max-w-xl text-base text-slate-500 dark:text-slate-400 sm:text-lg">
           A multi-user code vault and in-browser IDE. Organize projects into
           folders, run code in a dozen-plus languages, and share your work
           with one click.
@@ -420,7 +412,12 @@ export default function HomePage() {
             Start building
             <ArrowRight size={15} />
           </Link>
-          <HeroSecondaryLink />
+          <a
+            href="#features"
+            className="pill-btn border border-slate-200/80 bg-white/60 px-6 py-3 text-sm font-medium text-slate-700 backdrop-blur-xl hover:bg-white dark:border-slate-800 dark:bg-white/5 dark:text-slate-200 dark:hover:bg-white/10"
+          >
+            See how it works
+          </a>
         </div>
 
         <div className="mt-8 w-full">
@@ -428,14 +425,15 @@ export default function HomePage() {
         </div>
       </header>
 
-      <section id="languages" className="relative z-10 scroll-mt-28 overflow-hidden py-10">
-        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-canvas-light to-transparent dark:from-canvas-dark sm:w-40" />
-        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-canvas-light to-transparent dark:from-canvas-dark sm:w-40" />
+      {/* Languages Marquee */}
+      <section id="languages" className="relative z-10 scroll-mt-28 overflow-hidden py-8 sm:py-10">
+        <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-12 bg-gradient-to-r from-canvas-light to-transparent dark:from-canvas-dark sm:w-40" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-12 bg-gradient-to-l from-canvas-light to-transparent dark:from-canvas-dark sm:w-40" />
         <div className="marquee-track flex w-max gap-3">
           {[...LANGUAGES, ...LANGUAGES].map((lang, i) => (
             <span
               key={i}
-              className="glass-card flex-shrink-0 px-5 py-2.5 text-sm font-medium text-slate-600 dark:text-slate-300"
+              className="glass-card flex-shrink-0 px-4 py-2 text-xs font-medium text-slate-600 dark:text-slate-300 sm:px-5 sm:py-2.5 sm:text-sm"
             >
               {lang}
             </span>
@@ -443,35 +441,39 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section id="features" className="relative z-10 mx-auto max-w-5xl scroll-mt-28 px-6 py-20">
-        <FadeSection className="mb-14 text-center">
+      {/* Features Section */}
+      <section id="features" className="relative z-10 mx-auto max-w-5xl scroll-mt-28 px-5 py-16 sm:px-6 sm:py-20">
+        <FadeSection className="mb-12 text-center sm:mb-14">
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
             How it works
           </p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 sm:text-3xl">
             Three steps from idea to running code
           </h2>
         </FadeSection>
 
-        <div className="flex flex-col gap-16">
-          <FadeSection className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
+        <div className="flex flex-col gap-12 sm:gap-16">
+          {/* Step 1 */}
+          <FadeSection className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-10">
             <div>
-              <StepBadge icon={<Terminal size={18} />} number="01" />
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-                Write, run, repeat
-              </h3>
-              <ul className="mt-4 space-y-2.5 text-sm text-slate-500 dark:text-slate-400">
-                <li className="flex items-start gap-2">
-                  <Check size={15} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                  Monaco editor with full syntax highlighting for every supported language
+              <div className="mb-4 flex items-center gap-3.5">
+                <StepBadge icon={<Terminal size={18} />} />
+                <h3 className="text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+                  Write, run, repeat
+                </h3>
+              </div>
+              <ul className="space-y-2.5 text-sm text-slate-500 dark:text-slate-400">
+                <li className="flex items-start gap-2.5">
+                  <Check size={16} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                  <span>Monaco editor with full syntax highlighting for every supported language</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check size={15} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                  Interactive stdin drawer for programs that read input
+                <li className="flex items-start gap-2.5">
+                  <Check size={16} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                  <span>Interactive stdin drawer for programs that read input</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check size={15} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                  Live sandboxed preview for HTML/CSS
+                <li className="flex items-start gap-2.5">
+                  <Check size={16} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                  <span>Live sandboxed preview for HTML/CSS</span>
                 </li>
               </ul>
             </div>
@@ -480,50 +482,56 @@ export default function HomePage() {
             </div>
           </FadeSection>
 
-          <FadeSection className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
-            <div className="glass-card overflow-hidden md:order-1">
+          {/* Step 2 */}
+          <FadeSection className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-10">
+            <div className="order-2 glass-card overflow-hidden md:order-1">
               <FoldersVisual />
             </div>
-            <div className="md:order-2">
-              <StepBadge icon={<FolderTree size={18} />} number="02" />
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-                Folders, not commits
-              </h3>
-              <ul className="mt-4 space-y-2.5 text-sm text-slate-500 dark:text-slate-400">
-                <li className="flex items-start gap-2">
-                  <Check size={15} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                  Group files into vaults the way you already think about projects
+            <div className="order-1 md:order-2">
+              <div className="mb-4 flex items-center gap-3.5">
+                <StepBadge icon={<FolderTree size={18} />} />
+                <h3 className="text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+                  Folders, not commits
+                </h3>
+              </div>
+              <ul className="space-y-2.5 text-sm text-slate-500 dark:text-slate-400">
+                <li className="flex items-start gap-2.5">
+                  <Check size={16} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                  <span>Group files into vaults the way you already think about projects</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check size={15} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                  Autosaves as you type &mdash; no manual commits or pushes
+                <li className="flex items-start gap-2.5">
+                  <Check size={16} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                  <span>Autosaves as you type &mdash; no manual commits or pushes</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Check size={15} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                  Toggle any vault private or public in one click
+                <li className="flex items-start gap-2.5">
+                  <Check size={16} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                  <span>Toggle any vault private or public in one click</span>
                 </li>
               </ul>
             </div>
           </FadeSection>
 
-          <FadeSection className="grid grid-cols-1 items-center gap-10 md:grid-cols-2">
+          {/* Step 3 */}
+          <FadeSection className="grid grid-cols-1 items-center gap-6 md:grid-cols-2 md:gap-10">
             <div>
-              <StepBadge icon={<Compass size={18} />} number="03" />
-              <h3 className="text-xl font-semibold text-slate-900 dark:text-slate-100">
-                Explore, fork, ship
-              </h3>
-              <ul className="mt-4 space-y-2.5 text-sm text-slate-500 dark:text-slate-400">
-                <li className="flex items-start gap-2">
-                  <GitFork size={15} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                  Browse public vaults from other students and fork with one click
+              <div className="mb-4 flex items-center gap-3.5">
+                <StepBadge icon={<Compass size={18} />} />
+                <h3 className="text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+                  Explore, fork, ship
+                </h3>
+              </div>
+              <ul className="space-y-2.5 text-sm text-slate-500 dark:text-slate-400">
+                <li className="flex items-start gap-2.5">
+                  <GitFork size={16} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                  <span>Browse public vaults from other students and fork with one click</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Download size={15} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                  Export any vault as a ready-to-run .zip whenever you need it offline
+                <li className="flex items-start gap-2.5">
+                  <Download size={16} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                  <span>Export any vault as a ready-to-run .zip whenever you need it offline</span>
                 </li>
-                <li className="flex items-start gap-2">
-                  <Code2 size={15} className="mt-0.5 flex-shrink-0 text-emerald-500" />
-                  Sign in with email or Google in seconds
+                <li className="flex items-start gap-2.5">
+                  <Code2 size={16} className="mt-0.5 flex-shrink-0 text-emerald-500" />
+                  <span>Sign in with email or Google in seconds</span>
                 </li>
               </ul>
             </div>
@@ -534,9 +542,10 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="relative z-10 mx-auto max-w-4xl px-6 py-10">
-        <FadeSection className="glass-card flex flex-col items-center gap-4 p-10 text-center">
-          <h3 className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+      {/* Free Callout */}
+      <section className="relative z-10 mx-auto max-w-4xl px-5 py-8 sm:px-6 sm:py-10">
+        <FadeSection className="glass-card flex flex-col items-center gap-4 p-8 text-center sm:p-10">
+          <h3 className="text-xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 sm:text-2xl">
             Free to use, start to finish
           </h3>
           <p className="max-w-md text-sm text-slate-500 dark:text-slate-400">
@@ -553,12 +562,13 @@ export default function HomePage() {
         </FadeSection>
       </section>
 
-      <section id="faq" className="relative z-10 mx-auto max-w-2xl scroll-mt-28 px-6 py-20">
+      {/* FAQ Section */}
+      <section id="faq" className="relative z-10 mx-auto max-w-2xl scroll-mt-28 px-5 py-16 sm:px-6 sm:py-20">
         <FadeSection className="mb-10 text-center">
           <p className="text-xs font-semibold uppercase tracking-widest text-slate-400">
             Questions
           </p>
-          <h2 className="mt-2 text-3xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+          <h2 className="mt-2 text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100 sm:text-3xl">
             Frequently asked
           </h2>
         </FadeSection>
@@ -569,7 +579,8 @@ export default function HomePage() {
         </div>
       </section>
 
-      <footer className="relative z-10 border-t border-slate-200/60 px-6 py-10 dark:border-slate-800/60">
+      {/* Footer */}
+      <footer className="relative z-10 border-t border-slate-200/60 px-5 py-10 dark:border-slate-800/60 sm:px-6">
         <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 text-center md:flex-row md:items-center md:justify-between md:text-left">
           <div className="flex items-center gap-2">
             <div className="flex h-7 w-7 items-center justify-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
@@ -592,19 +603,19 @@ export default function HomePage() {
           </div>
 
           <p className="text-xs text-slate-400">
-            A student portfolio project. Built with React, Supabase &amp;
-            Judge0.
+            A Project by Paula Ng. Built with React, Supabase &amp; Judge0.
           </p>
         </div>
       </footer>
 
+      {/* Scroll-To-Top Button */}
       {showScrollTop && (
         <button
           onClick={scrollToTop}
           aria-label="Scroll to top"
-          className="pill-btn fixed bottom-6 right-6 z-40 flex h-11 w-11 items-center justify-center bg-slate-900 text-white shadow-lg transition-opacity hover:opacity-90 dark:bg-white dark:text-slate-900"
+          className="pill-btn fixed bottom-5 right-5 z-40 flex h-10 w-10 items-center justify-center bg-slate-900 text-white shadow-lg transition-opacity hover:opacity-90 dark:bg-white dark:text-slate-900 sm:bottom-6 sm:right-6 sm:h-11 sm:w-11"
         >
-          <ArrowUp size={18} />
+          <ArrowUp size={16} />
         </button>
       )}
     </div>
