@@ -74,7 +74,7 @@ export default function DashboardLayout({ children }) {
 
       {/* Mobile Header Bar (< md) */}
       <div className="relative z-20 flex min-w-0 flex-1 flex-col">
-        <header className="p-4 pb-0 md:p-6 md:pb-0 md:pl-0">
+        <header className="flex items-center justify-end p-4 pb-0 md:p-6 md:pb-0 md:pl-0">
           <div className="glass-panel flex w-full items-center justify-between px-4 py-3 md:hidden">
             <div className="flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
