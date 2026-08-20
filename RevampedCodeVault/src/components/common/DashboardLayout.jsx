@@ -28,7 +28,7 @@ export default function DashboardLayout({ children }) {
       <div className="pointer-events-none absolute -left-20 top-10 h-72 w-72 rounded-full bg-pink-200/40 aura-blur animate-floatAura dark:bg-indigo-500/20" />
       <div className="pointer-events-none absolute right-0 top-40 h-96 w-96 rounded-full bg-sky-200/40 aura-blur animate-floatAura dark:bg-violet-500/20" />
 
-      {/* Desktop Sidebar (md and up) */}
+      {/* Desktop Sidebar */}
       <aside className="relative z-10 hidden w-64 flex-shrink-0 flex-col gap-6 p-6 md:flex">
         <div className="glass-panel flex flex-1 flex-col p-5">
           <div className="mb-8 flex items-center gap-2.5 px-2">
@@ -51,31 +51,35 @@ export default function DashboardLayout({ children }) {
             </NavLink>
           </nav>
 
+          {/* Desktop Footer: User info, Theme toggle & Sign out */}
           <div className="mt-6 flex items-center justify-between border-t border-slate-200/60 pt-4 dark:border-slate-800/60">
-            <div className="min-w-0 pr-2">
+            <div className="min-w-0 pr-1">
               <p className="truncate text-sm font-medium text-slate-900 dark:text-slate-100">
                 {profile?.username ?? 'Loading...'}
               </p>
-              <p className="text-xs uppercase tracking-wider text-slate-500 dark:text-slate-500">
+              <p className="text-xs uppercase tracking-wider text-slate-500">
                 Student
               </p>
             </div>
-            <button
-              onClick={handleSignOut}
-              aria-label="Sign out"
-              title="Sign out"
-              className="flex h-9 w-9 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-red-50 hover:text-red-500 dark:text-slate-400 dark:hover:bg-red-500/10"
-            >
-              <LogOut size={16} />
-            </button>
+            <div className="flex items-center gap-1.5">
+              <ThemeToggle />
+              <button
+                onClick={handleSignOut}
+                aria-label="Sign out"
+                title="Sign out"
+                className="flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-red-50 hover:text-red-500 dark:text-slate-400 dark:hover:bg-red-500/10"
+              >
+                <LogOut size={16} />
+              </button>
+            </div>
           </div>
         </div>
       </aside>
 
-      {/* Main Content Container */}
+      {/* Main Content Area */}
       <div className="relative z-10 flex min-w-0 flex-1 flex-col">
-        {/* Mobile Header (< md only) */}
-        <div className="p-4 pb-0 md:hidden">
+        {/* Mobile Header Bar */}
+        <header className="p-4 pb-0 md:hidden">
           <div className="glass-panel flex w-full items-center justify-between px-4 py-3">
             <div className="flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
@@ -97,13 +101,13 @@ export default function DashboardLayout({ children }) {
               </button>
             </div>
           </div>
-        </div>
+        </header>
 
-        {/* Mobile Drawer Navigation */}
+        {/* Mobile Drawer Menu */}
         {mobileMenuOpen && (
           <div className="fixed inset-0 z-50 flex flex-col bg-slate-900/40 backdrop-blur-sm md:hidden">
             <div className="glass-panel m-4 flex flex-1 flex-col p-5 shadow-2xl">
-              <div className="mb-6 flex items-center justify-between pb-3 border-b border-slate-200/60 dark:border-slate-800/60">
+              <div className="mb-6 flex items-center justify-between border-b border-slate-200/60 pb-3 dark:border-slate-800/60">
                 <div className="flex items-center gap-2.5">
                   <div className="flex h-8 w-8 items-center justify-center rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900">
                     <Code2 size={16} />
@@ -160,13 +164,8 @@ export default function DashboardLayout({ children }) {
           </div>
         )}
 
-        {/* Main Content Area */}
-        <main className="relative flex-1 p-4 md:p-6">
-          <div className="absolute right-6 top-6 z-20 hidden md:block">
-            <ThemeToggle />
-          </div>
-          {children}
-        </main>
+        {/* Page Content */}
+        <main className="flex-1 p-4 md:p-6">{children}</main>
       </div>
     </div>
   );
