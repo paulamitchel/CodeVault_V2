@@ -72,10 +72,11 @@ export default function DashboardLayout({ children }) {
         </div>
       </aside>
 
-      {/* Mobile Header Bar (< md) */}
-      <div className="relative z-20 flex min-w-0 flex-1 flex-col">
-        <header className="flex items-center justify-end p-4 pb-0 md:p-6 md:pb-0 md:pl-0">
-          <div className="glass-panel flex w-full items-center justify-between px-4 py-3 md:hidden">
+      {/* Main Content Container */}
+      <div className="relative z-10 flex min-w-0 flex-1 flex-col">
+        {/* Mobile Header (< md only) */}
+        <div className="p-4 pb-0 md:hidden">
+          <div className="glass-panel flex w-full items-center justify-between px-4 py-3">
             <div className="flex items-center gap-2">
               <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-slate-900 text-white dark:bg-white dark:text-slate-900">
                 <Code2 size={16} />
@@ -96,14 +97,9 @@ export default function DashboardLayout({ children }) {
               </button>
             </div>
           </div>
+        </div>
 
-          {/* Desktop Top Bar Theme Switcher */}
-          <div className="ml-auto hidden md:block">
-            <ThemeToggle />
-          </div>
-        </header>
-
-        {/* Mobile Slide-Over Drawer Navigation */}
+        {/* Mobile Drawer Navigation */}
         {mobileMenuOpen && (
           <div className="fixed inset-0 z-50 flex flex-col bg-slate-900/40 backdrop-blur-sm md:hidden">
             <div className="glass-panel m-4 flex flex-1 flex-col p-5 shadow-2xl">
@@ -165,7 +161,12 @@ export default function DashboardLayout({ children }) {
         )}
 
         {/* Main Content Area */}
-        <main className="flex-1 p-4 md:p-6">{children}</main>
+        <main className="relative flex-1 p-4 md:p-6">
+          <div className="absolute right-6 top-6 z-20 hidden md:block">
+            <ThemeToggle />
+          </div>
+          {children}
+        </main>
       </div>
     </div>
   );
