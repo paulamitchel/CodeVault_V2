@@ -51,21 +51,21 @@ export default function DashboardLayout({ children }) {
             </NavLink>
           </nav>
 
-          {/* Desktop Footer: Theme toggle placed above the profile */}
-          <div className="mt-auto flex flex-col gap-4 border-t border-slate-200/60 pt-4 dark:border-slate-800/60">
-            <div className="flex items-center justify-between px-1">
-              <span className="text-xs font-medium text-slate-500 dark:text-slate-400">
-                Theme
+          {/* Desktop Footer: Theme toggle in a dedicated block above the user card */}
+          <div className="mt-auto flex flex-col gap-3 border-t border-slate-200/60 pt-4 dark:border-slate-800/60">
+            <div className="flex items-center justify-between px-2 py-1">
+              <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Appearance
               </span>
               <ThemeToggle />
             </div>
 
-            <div className="flex items-center justify-between pt-1">
+            <div className="flex items-center justify-between rounded-xl bg-white/40 p-2.5 dark:bg-white/5">
               <div className="min-w-0 pr-2">
-                <p className="truncate text-sm font-medium text-slate-900 dark:text-slate-100">
+                <p className="truncate text-sm font-semibold text-slate-900 dark:text-slate-100">
                   {profile?.username ?? 'Loading...'}
                 </p>
-                <p className="text-xs uppercase tracking-wider text-slate-500">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-slate-500 dark:text-slate-400">
                   Student
                 </p>
               </div>
@@ -73,7 +73,7 @@ export default function DashboardLayout({ children }) {
                 onClick={handleSignOut}
                 aria-label="Sign out"
                 title="Sign out"
-                className="flex h-8 w-8 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-red-50 hover:text-red-500 dark:text-slate-400 dark:hover:bg-red-500/10"
+                className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-red-50 hover:text-red-500 dark:text-slate-400 dark:hover:bg-red-500/20"
               >
                 <LogOut size={16} />
               </button>
