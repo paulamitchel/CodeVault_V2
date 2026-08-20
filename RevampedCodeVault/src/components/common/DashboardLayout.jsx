@@ -55,7 +55,6 @@ export default function DashboardLayout({ children }) {
           <div className="mt-auto flex flex-col gap-3 border-t border-slate-200/60 pt-4 dark:border-slate-800/60">
             <div className="flex items-center justify-between px-2 py-1">
               <span className="text-xs font-semibold uppercase tracking-wider text-slate-400 dark:text-slate-500">
-                Appearance
               </span>
               <ThemeToggle />
             </div>
