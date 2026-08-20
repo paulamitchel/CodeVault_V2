@@ -123,26 +123,26 @@ export default function VaultsPage() {
     <DashboardLayout>
       <div className="mb-6 flex items-center justify-between">
         <div>
-          <p className="text-xs font-medium uppercase tracking-widest text-slate-500">
+          <p className="text-xs font-semibold uppercase tracking-wider text-slate-400">
             Workspace
           </p>
-          <h1 className="text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100">
+          <h1 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-slate-100">
             My Vaults
           </h1>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="pill-btn flex items-center gap-2 bg-slate-900 px-5 py-2.5 text-sm font-medium text-white shadow-sm shadow-slate-900/20 transition-colors hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:shadow-none dark:hover:bg-slate-100"
+          className="pill-btn flex items-center gap-1.5 bg-slate-900 px-4 py-2 text-xs sm:text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
         >
           <Plus size={16} />
-          New Vault
+          <span>New Vault</span>
         </button>
       </div>
 
       {loading ? (
         <p className="text-sm text-slate-400">Loading your vaults...</p>
       ) : folders.length === 0 ? (
-        <div className="glass-card flex flex-col items-center justify-center gap-3 p-16 text-center">
+        <div className="glass-card flex flex-col items-center justify-center gap-3 p-10 sm:p-16 text-center">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900/5 text-slate-400 dark:bg-white/5 dark:text-slate-500">
             <FolderPlus size={22} />
           </div>
@@ -150,20 +150,20 @@ export default function VaultsPage() {
             <p className="text-sm font-medium text-slate-700 dark:text-slate-200">
               No vaults yet
             </p>
-            <p className="mt-1 text-sm text-slate-500 dark:text-slate-400">
+            <p className="mt-1 text-xs sm:text-sm text-slate-500 dark:text-slate-400">
               Create your first vault to start writing and running code.
             </p>
           </div>
         </div>
       ) : (
-        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {folders.map((folder) => (
             <div
               key={folder.id}
-              className="glass-card group relative flex flex-col gap-3 overflow-hidden p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg hover:shadow-slate-900/10 dark:hover:shadow-black/30"
+              className="glass-card group relative flex flex-col gap-3 overflow-hidden p-5 transition-all duration-200 hover:-translate-y-0.5 hover:shadow-lg"
             >
-              <div className="absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br from-pink-200/50 to-sky-200/50 blur-2xl dark:from-indigo-500/20 dark:to-cyan-500/10" />
-              
+              <div className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 rounded-full bg-gradient-to-br from-pink-200/50 to-sky-200/50 blur-2xl dark:from-indigo-500/20 dark:to-cyan-500/10" />
+
               <div className="relative flex items-start justify-between">
                 <div className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200/70 bg-white text-slate-700 shadow-sm dark:border-slate-700 dark:bg-white/10 dark:text-slate-200">
                   <FileCode size={18} />
@@ -190,8 +190,8 @@ export default function VaultsPage() {
                 <span className="text-xs text-slate-400">
                   {new Date(folder.created_at).toLocaleDateString()}
                 </span>
-                
-                {/* Actions: Download -> Pencil -> Delete */}
+
+                {/* Actions */}
                 <div className="flex items-center gap-1">
                   <button
                     onClick={() => handleExport(folder)}
@@ -226,9 +226,9 @@ export default function VaultsPage() {
 
       {/* New Vault Modal */}
       {showModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/30 p-6 backdrop-blur-sm">
-          <div className="glass-card w-full max-w-sm p-6 shadow-2xl shadow-slate-900/20">
-            <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/30 p-4 sm:p-6 backdrop-blur-sm">
+          <div className="glass-card w-full max-w-sm p-5 sm:p-6 shadow-2xl">
+            <h2 className="mb-4 text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100">
               New Vault
             </h2>
             <form onSubmit={handleCreate} className="flex flex-col gap-3">
@@ -259,14 +259,14 @@ export default function VaultsPage() {
                 <button
                   type="button"
                   onClick={() => setShowModal(false)}
-                  className="pill-btn flex-1 border border-slate-200 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-white/5"
+                  className="pill-btn flex-1 border border-slate-200 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-white/5"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={creating}
-                  className="pill-btn flex-1 bg-slate-900 py-2.5 text-sm font-medium text-white shadow-sm shadow-slate-900/20 transition-colors hover:bg-slate-800 disabled:opacity-60 dark:bg-white dark:text-slate-900 dark:shadow-none dark:hover:bg-slate-100"
+                  className="pill-btn flex-1 bg-slate-900 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-800 disabled:opacity-60 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
                 >
                   Create
                 </button>
@@ -278,9 +278,9 @@ export default function VaultsPage() {
 
       {/* Edit Vault Modal */}
       {editingFolder && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/30 p-6 backdrop-blur-sm">
-          <div className="glass-card w-full max-w-sm p-6 shadow-2xl shadow-slate-900/20">
-            <h2 className="mb-4 text-lg font-semibold text-slate-900 dark:text-slate-100">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/30 p-4 sm:p-6 backdrop-blur-sm">
+          <div className="glass-card w-full max-w-sm p-5 sm:p-6 shadow-2xl">
+            <h2 className="mb-4 text-base sm:text-lg font-semibold text-slate-900 dark:text-slate-100">
               Edit Vault
             </h2>
             <form onSubmit={handleUpdateVault} className="flex flex-col gap-3">
@@ -311,14 +311,14 @@ export default function VaultsPage() {
                 <button
                   type="button"
                   onClick={() => setEditingFolder(null)}
-                  className="pill-btn flex-1 border border-slate-200 py-2.5 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-white/5"
+                  className="pill-btn flex-1 border border-slate-200 py-2 text-sm font-medium text-slate-600 transition-colors hover:bg-slate-50 dark:border-slate-700 dark:text-slate-300 dark:hover:bg-white/5"
                 >
                   Cancel
                 </button>
                 <button
                   type="submit"
                   disabled={updating}
-                  className="pill-btn flex-1 bg-slate-900 py-2.5 text-sm font-medium text-white shadow-sm shadow-slate-900/20 transition-colors hover:bg-slate-800 disabled:opacity-60 dark:bg-white dark:text-slate-900 dark:shadow-none dark:hover:bg-slate-100"
+                  className="pill-btn flex-1 bg-slate-900 py-2 text-sm font-medium text-white shadow-sm transition-colors hover:bg-slate-800 disabled:opacity-60 dark:bg-white dark:text-slate-900 dark:hover:bg-slate-100"
                 >
                   Save Changes
                 </button>

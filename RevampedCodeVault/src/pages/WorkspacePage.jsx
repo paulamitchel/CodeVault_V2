@@ -42,7 +42,7 @@ function StatusBadge({ result, error }) {
       }`}
     >
       {isSuccess ? 'Success' : result.statusDescription || 'Runtime error'}
-      {' \u00b7 '}
+      {' · '}
       {result.time ? `${result.time}s` : `${result.durationMs} ms`}
     </span>
   );
@@ -172,7 +172,6 @@ export default function WorkspacePage() {
     run(currentFile.language, codeRef.current, stdinRef.current);
   }, [run]);
 
-  // Monaco Editor mount: Bind Ctrl+Enter / Cmd+Enter
   const handleEditorDidMount = (editor, monaco) => {
     editorRef.current = editor;
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
@@ -180,7 +179,6 @@ export default function WorkspacePage() {
     });
   };
 
-  // ZIP Export Handler
   const handleExportZip = async () => {
     if (!folder || files.length === 0) return;
     setIsExporting(true);
@@ -198,24 +196,25 @@ export default function WorkspacePage() {
 
   return (
     <DashboardLayout>
-      {/* Top Header & Clean Breadcrumb Bar */}
-      <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
-        <div className="flex min-w-0 flex-1 items-center gap-2">
-          <nav className="flex min-w-0 items-center gap-1.5 text-sm">
+      {/* Top Workspace Header & Toolset */}
+      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        {/* Breadcrumb Navigation */}
+        <div className="min-w-0">
+          <nav className="flex flex-wrap items-center gap-1.5 text-xs sm:text-sm">
             <Link
               to="/vaults"
-              className="rounded-lg px-1.5 py-1 font-medium text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10"
+              className="rounded-lg px-1.5 py-0.5 font-medium text-slate-600 transition-colors hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10"
             >
               My Vaults
             </Link>
-            <ChevronRight size={13} className="flex-shrink-0 text-slate-300 dark:text-slate-700" />
-            <span className="truncate font-semibold text-slate-800 dark:text-slate-100">
+            <ChevronRight size={13} className="flex-shrink-0 text-slate-400 dark:text-slate-600" />
+            <span className="truncate font-semibold text-slate-900 dark:text-slate-100">
               {folder?.name ?? 'Loading...'}
             </span>
             {activeFile && (
               <>
-                <ChevronRight size={13} className="flex-shrink-0 text-slate-300 dark:text-slate-700" />
-                <span className="truncate text-slate-500 dark:text-slate-500">
+                <ChevronRight size={13} className="flex-shrink-0 text-slate-400 dark:text-slate-600" />
+                <span className="truncate text-slate-500 dark:text-slate-400">
                   {activeFile.name}
                 </span>
               </>
@@ -224,7 +223,7 @@ export default function WorkspacePage() {
         </div>
 
         {/* Action Controls */}
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           <button
             onClick={handleExportZip}
             disabled={isExporting || files.length === 0}
@@ -241,7 +240,7 @@ export default function WorkspacePage() {
                 value={activeFile.language}
                 onChange={handleLanguageChange}
                 options={languageOptions}
-                className="w-40"
+                className="w-36 sm:w-40"
               />
               <button
                 onClick={handleRun}
@@ -273,52 +272,58 @@ export default function WorkspacePage() {
             <button
               onClick={handleAddFile}
               aria-label="Add file"
-              className="flex h-6 w-6 items-center justify-center rounded-full text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-slate-200"
+              className="flex h-6 w-6 items-center justify-center rounded-lg text-slate-500 transition-colors hover:bg-slate-100 hover:text-slate-700 dark:text-slate-400 dark:hover:bg-white/10 dark:hover:text-slate-200"
             >
               <Plus size={14} />
             </button>
           </div>
-          {files.map((file) => (
-            <div
-              key={file.id}
-              onClick={() => selectFile(file)}
-              className={`group flex cursor-pointer items-center justify-between rounded-xl px-3 py-2 text-sm transition-colors ${
-                activeFile?.id === file.id
-                  ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900'
-                  : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10'
-              }`}
-            >
-              <div className="flex min-w-0 items-center gap-2">
-                <FileCode size={14} className="flex-shrink-0 opacity-70" />
-                <span className="truncate">{file.name}</span>
+          <div className="flex flex-col gap-1">
+            {files.map((file) => (
+              <div
+                key={file.id}
+                onClick={() => selectFile(file)}
+                className={`group flex cursor-pointer items-center justify-between rounded-xl px-3 py-2 text-sm transition-colors ${
+                  activeFile?.id === file.id
+                    ? 'bg-slate-900 text-white dark:bg-white dark:text-slate-900 shadow-sm'
+                    : 'text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-white/10'
+                }`}
+              >
+                <div className="flex min-w-0 items-center gap-2">
+                  <FileCode size={14} className="flex-shrink-0 opacity-70" />
+                  <span className="truncate">{file.name}</span>
+                </div>
+                <button
+                  type="button"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleDeleteFile(file.id);
+                  }}
+                  aria-label={`Delete ${file.name}`}
+                  className="opacity-70 sm:opacity-0 transition-opacity group-hover:opacity-100 hover:text-red-400"
+                >
+                  <Trash2 size={12} />
+                </button>
               </div>
-              <Trash2
-                size={12}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  handleDeleteFile(file.id);
-                }}
-                className="opacity-0 transition-opacity group-hover:opacity-70 hover:text-red-400"
-              />
-            </div>
-          ))}
+            ))}
+          </div>
           {files.length === 0 && (
             <p className="px-2 py-3 text-xs text-slate-500">No files yet.</p>
           )}
         </div>
 
         {/* Column 2: Monaco Code Editor */}
-        <div className="glass-card monaco-wrapper p-1 xl:order-2">
+        <div className="glass-card monaco-wrapper p-1 xl:order-2 overflow-hidden">
           {activeFile ? (
             <Editor
-              height="500px"
+              height="420px"
+              className="sm:min-h-[500px]"
               language={activeMeta?.monacoLang || 'javascript'}
               theme={theme === 'dark' ? 'vs-dark' : 'vs'}
               value={code}
               onChange={handleCodeChange}
               onMount={handleEditorDidMount}
               options={{
-                fontSize: 14,
+                fontSize: 13,
                 minimap: { enabled: false },
                 smoothScrolling: true,
                 scrollBeyondLastLine: false,
@@ -326,7 +331,7 @@ export default function WorkspacePage() {
               }}
             />
           ) : (
-            <div className="flex h-[500px] items-center justify-center text-sm text-slate-500">
+            <div className="flex h-[350px] sm:h-[500px] items-center justify-center text-sm text-slate-500">
               Select or create a file to start coding.
             </div>
           )}
@@ -365,18 +370,18 @@ export default function WorkspacePage() {
             )}
           </div>
 
-          <div className="min-h-[456px] flex-1 overflow-auto p-4">
+          <div className="min-h-[260px] sm:min-h-[456px] flex-1 overflow-auto p-4">
             {consoleTab === 'stdin' ? (
               <div className="flex h-full flex-col gap-2">
                 <div className="flex items-center gap-1.5 text-[11px] text-slate-500 dark:text-slate-400">
                   <Terminal size={12} />
-                  <span>Standard Input (passed to input / cin / stdin during execution)</span>
+                  <span>Standard Input (passed to stdin during execution)</span>
                 </div>
                 <textarea
                   value={stdin}
                   onChange={(e) => setStdin(e.target.value)}
                   placeholder="Enter inputs here (e.g. arguments or interactive answers)..."
-                  className="h-full min-h-[380px] w-full resize-none rounded-xl border border-slate-200 bg-white p-3 font-mono text-sm outline-none dark:border-slate-700 dark:bg-white/5 dark:text-slate-100"
+                  className="h-full min-h-[220px] sm:min-h-[380px] w-full resize-none rounded-xl border border-slate-200 bg-white p-3 font-mono text-sm outline-none dark:border-slate-700 dark:bg-white/5 dark:text-slate-100"
                 />
               </div>
             ) : activeMeta?.id === 'html' ? (
@@ -385,7 +390,7 @@ export default function WorkspacePage() {
                   title="html-sandbox"
                   sandbox="allow-scripts"
                   srcDoc={code}
-                  className="h-full min-h-[420px] w-full rounded-xl bg-white"
+                  className="h-full min-h-[300px] sm:min-h-[420px] w-full rounded-xl bg-white"
                 />
               ) : (
                 <p className="text-sm text-slate-500">
@@ -395,15 +400,15 @@ export default function WorkspacePage() {
             ) : (
               <>
                 {error && (
-                  <pre className="whitespace-pre-wrap font-mono text-sm text-red-500">{error}</pre>
+                  <pre className="whitespace-pre-wrap font-mono text-xs sm:text-sm text-red-500">{error}</pre>
                 )}
                 {result?.stdout && (
-                  <pre className="whitespace-pre-wrap font-mono text-sm text-slate-700 dark:text-slate-300">
+                  <pre className="whitespace-pre-wrap font-mono text-xs sm:text-sm text-slate-700 dark:text-slate-300">
                     {result.stdout}
                   </pre>
                 )}
                 {result?.stderr && (
-                  <pre className="whitespace-pre-wrap font-mono text-sm text-red-500">
+                  <pre className="whitespace-pre-wrap font-mono text-xs sm:text-sm text-red-500">
                     {result.stderr}
                   </pre>
                 )}
